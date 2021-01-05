@@ -1,12 +1,9 @@
 import React from "react";
 import { StyleSheet, View, FlatList, SafeAreaView, Alert } from "react-native";
 import Constants from "expo-constants";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "./screens/HomeScreen";
+import AppNavigator from "./navigation/AppNavigator";
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
-const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   container: {
@@ -38,15 +35,5 @@ const styles = StyleSheet.create({
 });
 
 export default App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  return <AppNavigator />;
 };
