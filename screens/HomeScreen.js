@@ -4,12 +4,8 @@ import { StyleSheet, View, FlatList, SafeAreaView, Alert } from "react-native";
 import ListItem from "../components/ListItem";
 import Constants from "expo-constants";
 import axios from "axios";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
 const URL = `http://newsapi.org/v2/top-headlines?country=jp&apiKey=${Constants.manifest.extra.newsApiKey}`;
-
-const Stack = createStackNavigator();
 
 const styles = StyleSheet.create({
   container: {
@@ -40,7 +36,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen = () => {
+export default HomeScreen = ({ navigation }) => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     fetchArticles();
@@ -64,6 +60,7 @@ export default HomeScreen = () => {
             imageUrl={item.urlToImage}
             title={item.title}
             author={item.author}
+            onPress={() => navigation.navigate("Article")}
           />
         )}
         keyExtractor={(item, index) => index.toString()}
