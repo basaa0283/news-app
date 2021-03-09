@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { FontAwesome } from "@expo/vector-icons";
 import HomeScreen from "../screens/HomeScreen";
 import ArticleScreen from "../screens/ArticleScreen";
 import ClipScreen from "../screens/ClipScreen";
@@ -30,10 +31,25 @@ const ClipStack = () => {
   );
 };
 
+const screenOption = ({ route }) => ({
+  tabBarIcon: ({ color, size }) => {
+    let iconName;
+    switch (route.name) {
+      case "Home":
+        iconName = "home";
+        break;
+      case "Clip":
+        iconName = "bookmark";
+        break;
+    }
+    return <FontAwesome name={iconName} size={size} color={color} />;
+  },
+});
+
 export default AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator screenOptions={screenOption}>
         <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Clip" component={ClipStack} />
       </Tab.Navigator>
